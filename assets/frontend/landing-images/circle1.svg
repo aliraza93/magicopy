@@ -1,0 +1,15 @@
+<svg class="montage__layer__el" style="left: -120px; top: 0px;" width="1000px" height="760px" viewBox="0 0 1000 760" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                    <linearGradient x1="25.3755468%" y1="74.5073739%" x2="76.2487215%" y2="19.7317807%" id="linearGradient-1">
+                    <stop stop-color="#E64C4C" offset="0%"></stop>
+                    <stop stop-color="#FB8332" offset="100%"></stop>
+                    </linearGradient>
+                    <linearGradient x1="0%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+                    <stop stop-color="#FB8332" offset="0%"></stop>
+                    <stop stop-color="#F8C332" offset="100%"></stop>
+                </linearGradient>
+                </defs>
+                <circle class="shape" fill="#F7B500"  cx="230" cy="240" r="218"></circle>
+                <circle class="shape" fill="url(#linearGradient-1)" cx="807" cy="125" r="102"></circle>
+                <circle class="shape" fill="url(#linearGradient-2)" cx="550" cy="522" r="203"></circle>
+            </svg>
