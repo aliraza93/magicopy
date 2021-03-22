@@ -27,6 +27,7 @@
     <link href="{{asset('assets')}}/frontend/css/bootsnav.css" rel="stylesheet" />
     <link href="{{asset('assets')}}/frontend/style.css" rel="stylesheet">
     <link href="{{asset('assets')}}/frontend/css/responsive.css" rel="stylesheet" />
+    <link href="{{asset('assets')}}/frontend/css/landing-style.css" rel="stylesheet" />
     <!-- ========== End Stylesheet ========== -->
     {{-- js  --}}
     <script src="{{asset('assets')}}/frontend/js/jquery-1.12.4.min.js"></script>
@@ -157,6 +158,7 @@
     <script src="{{asset('assets')}}/frontend/js/bootsnav.js"></script>
     <script src="{{asset('assets')}}/frontend/js/main.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{asset('assets')}}/frontend/js/custom-google-animation.js"></script>
     
     @if(!empty(session('subscription')))
         <script>

@@ -1,7 +1,7 @@
 <template>
     <!-- Add Employee Modal -->
     <div class="modal fade" id="pay-with-card" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="loginModel">
@@ -13,99 +13,74 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container">
-                    <div class="row justify-content-center">
-
-                        <div class="col-md-12">
-                            <div class="alert alert-danger" v-if="errors">
-                                <ul>
-                                    <li v-for="error in errors" :key="error">{{ error[0] }}</li>
-                                </ul>
+                <div class="container mt-5 mb-5 d-flex justify-content-center">
+                    <div class="card">
+                        <div>
+                            <h4 class="heading">Upgrade your plan</h4>
+                            <p class="text">Please make the payment to start enjoying all the features of our premium plan as soon as possible</p>
+                        </div>
+                        <div class="pricing p-3 rounded mt-4 d-flex justify-content-between">
+                            <div class="images d-flex flex-row align-items-center"> <img src="https://i.imgur.com/S17BrTx.png" class="rounded" width="60">
+                                <div class="d-flex flex-column ml-4"> <span class="business">Growth</span> <span class="plan">CHANGE PLAN</span> </div>
                             </div>
-                            <form>
-                                <div class="form-group mb-3">
-                                    <label style="float: left;" for="inputNameOnCard"
-                                        >Name on Card
-                                        <span class="text-danger font-weight-bold">*</span></label
-                                    >
-                                    <br>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="inputNameOnCard"
-                                        aria-describedby="emailHelp"
-                                        v-model="card_details.name_on_card"
-                                    />
-                                    <div class="invalid-feedback">Name on Card is required!</div>    
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label style="float: left;" for="card-element">Credit Card</label>
-                                    <div id="card-element">
-
+                            <!--pricing table-->
+                            <div class="d-flex flex-row align-items-center"> <sup class="dollar font-weight-bold">$</sup> <span class="amount ml-1 mr-1">49</span> <span class="year font-weight-bold">/ month</span> </div> <!-- /pricing table-->
+                        </div>
+                        <div v-if="paymentMethodsLoadStatus == 2 && paymentMethods.length == 0" class="">
+                                <span class="detail mt-5">No payment method on file, please add a payment method.</span>
+                        </div>
+                        <div v-show="paymentMethodsLoadStatus == 2 && paymentMethods.length > 0">
+                            <span class="detail mt-5">Payment details</span>
+                            <div class="credit rounded mt-4 d-flex justify-content-between align-items-center" style="cursor: pointer;" v-for="(method, key) in paymentMethods" 
+                                    v-bind:key="'method-'+key" 
+                                    v-on:click="paymentMethodSelected = method.id"
+                                    v-bind:class="{
+                                    'bg-success text-light': paymentMethodSelected == method.id    
+                                }">
+                                    <div class="d-flex flex-row align-items-center"> <img src="https://i.imgur.com/qHX7vY1.png" class="rounded" width="70">
+                                        <div class="d-flex flex-column ml-3"> <span class="business">{{ method.brand.charAt(0).toUpperCase() }}{{ method.brand.slice(1) }}</span> <span class="plan">1234 XXXX XXXX {{ method.last_four }}</span> </div>
                                     </div>
-                                </div>
-                                <!-- Used to display form errors -->
-                                <div id="card-errors" role="alert"></div>
-
-                                <div class="form-group mb-0 text-center">
-                                    <button type="button" class='pay-with-stripe btn btn-primary' style="background-color: #FE6161" @click='submitPaymentMethod()'>Save Payment Method</button>
-                                </div>
-                            </form>
+                                    <div class="col-3">
+                                        <span style="cursor: pointer;" :disabled="disableSubmitButton" v-on:click.stop="removePaymentMethod( method.id )">Remove</span>
+                                    </div>
+                            </div>
                         </div>
-
-                    </div>
-                    <!-- end row -->
-
-                    <div class="mt-3 mb-3">
-                            OR
-                    </div>
-
-                    <div class="row justify-content-center">
-                        
-                        <div class="col-md-12">
-                            <div v-show="paymentMethodsLoadStatus == 2 && paymentMethods.length == 0" class="">
-                                    No payment method on file, please add a payment method.
-                            </div>
-
-                            <div v-show="paymentMethodsLoadStatus == 2 && paymentMethods.length > 0">
-                                <div style="cursor: pointer;" v-for="(method, key) in paymentMethods" 
-                                        v-bind:key="'method-'+key" 
-                                        v-on:click="paymentMethodSelected = method.id"
-                                        class="border rounded row p-1"
-                                        v-bind:class="{
-                                        'bg-success text-light': paymentMethodSelected == method.id    
-                                    }">
-                                        <div class="col-2">
-                                            {{ method.brand.charAt(0).toUpperCase() }}{{ method.brand.slice(1) }}
-                                        </div>
-                                        <div class="col-7">
-                                            Ending In: {{ method.last_four }} Exp: {{ method.exp_month }} / {{ method.exp_year }}
-                                        </div>
-                                        <div class="col-3">
-                                            <span style="cursor: pointer;" v-on:click.stop="removePaymentMethod( method.id )">Remove</span>
-                                        </div>
-                                </div>
-                            </div>
-                            <!-- end row -->
-
-                            <h4 class="mt-3 mb-3">Confirm your Plan</h4>
-
-                            <div style="cursor: pointer;" class="mt-3 row rounded border p-1" 
-                                v-bind:class="{'bg-success text-light': selectedPlan == 'plan_XXX'}" 
-                                v-on:click="selectedPlan = 'plan_XXX'">
-                                <div class="col-6">
-                                    Growth
-                                </div>
-                                <div class="col-6">
-                                    ${{ price }}/mo.
-                                </div>
-                            </div>
-
-                            <button class="btn btn btn-primary mt-3" style="background-color: #FE6161" id="add-card-button" v-on:click="updateSubscription()">
-                                Subscribe
-                            </button>
+                        <h6 class="mt-4 text-primary">ADD PAYMENT METHOD</h6>
+                        <div class="alert alert-danger" v-if="errors">
+                            <ul>
+                                <li v-for="error in errors" :key="error">{{ error[0] }}</li>
+                            </ul>
                         </div>
+                        <form>
+                            <div class="form-group mb-3">
+                                <label style="float: left;" for="inputNameOnCard"
+                                    >Name on Card
+                                    <span class="text-danger font-weight-bold">*</span></label
+                                >
+                                <br>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="inputNameOnCard"
+                                    aria-describedby="emailHelp"
+                                    v-model="card_details.name_on_card"
+                                />
+                                <div class="invalid-feedback">Name on Card is required!</div>    
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label style="float: left;" for="card-element">Credit Card</label>
+                                <div id="card-element">
+
+                                </div>
+                            </div>
+                            <!-- Used to display form errors -->
+                            <div id="card-errors" role="alert"></div>
+
+                            <div class="form-group mb-0 text-center">
+                                <button type="button" class='pay-with-stripe btn btn-primary mb-3' style="background-color: #FE6161" @click='submitPaymentMethod()'>Save Payment Method</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- end container -->
@@ -347,8 +322,92 @@ export default {
 
   created() {
       this.card_details.price = this.price
+  },
+
+  computed() {
+      disableSubmitButton
   }
 };
 </script>
+
+<style scoped>
+    .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 5px 6px 6px 2px #e9ecef
+    }
+
+    .heading {
+        font-size: 23px;
+        font-weight: 00
+    }
+
+    .text {
+        font-size: 16px;
+        font-weight: 500;
+        color: #b1b6bd
+    }
+
+    .pricing {
+        border: 2px solid #304FFE;
+        background-color: #f2f5ff
+    }
+
+    .business {
+        font-size: 20px;
+        font-weight: 500
+    }
+
+    .plan {
+        color: #aba4a4
+    }
+
+    .dollar {
+        font-size: 16px;
+        color: #6b6b6f
+    }
+
+    .amount {
+        font-size: 50px;
+        font-weight: 500
+    }
+
+    .year {
+        font-size: 20px;
+        color: #6b6b6f;
+        margin-top: 19px
+    }
+
+    .detail {
+        font-size: 22px;
+        font-weight: 500
+    }
+
+    .cvv {
+        height: 44px;
+        width: 73px;
+        border: 2px solid #eee
+    }
+
+    .cvv:focus {
+        box-shadow: none;
+        border: 2px solid #304FFE
+    }
+
+    .email-text {
+        height: 55px;
+        border: 2px solid #eee
+    }
+
+    .email-text:focus {
+        box-shadow: none;
+        border: 2px solid #304FFE
+    }
+
+    .payment-button {
+        height: 70px;
+        font-size: 20px
+    }
+</style>
 
 

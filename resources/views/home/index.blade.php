@@ -19,71 +19,157 @@
 <div id="app">
     <!-- Start Banner 
     ============================================= -->
-    <div class="banner-area responsive-top-pad inc-shape text-default banner-areahead">
-        <div class="container">
-            <div class="double-items">
-                <div class="row align-center" style="margin-top: 11%;">
-
-                    @php
-                    $main_content_text = json_decode($page_content->main_content);
-                    @endphp
-                    @if($main_content_text->main_content_display=='true')
-                    <div class="col-lg-5 info shape">
-                        @if(!empty($main_content_text->main_content_heading))
-                        <h2 class="wow fadeInDown" data-wow-duration="1s">{{$main_content_text->main_content_heading}}</strong></h2>
-                        @endif
-                        @if(!empty($main_content_text->main_content_text))
-                        <p class="wow fadeInLeft" data-wow-duration="1.5s">
-
-                            {{$main_content_text->main_content_text}}
-                        </p>
-                        @endif
-                        <div class="bottom">
-                            <a class="btn btn-md btn-gradient wow fadeInDown" style="border-radius: 50px;" data-wow-duration="1.8s" href="#">Get Started - Free!</a>
-
-                            <a href="#watch" class="video-btn wow fadeInUp"><i class="fas fa-play"></i>Watch Video</a>
-                        </div>
-                        <span style="margin-left: 37px; color: #4c545a96;">No credit card required</span>
+    <div class="container">
+        <div class="comingsoon row">
+            
+            {{-- <img class="top-icon" src="https://typeskip.ai/assets/frontend/landing-images/typeskip.png" alt="icon"> --}}
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="comingsoon-wrap" style="margin-top: 30%">
+                            
+                    <h1 style="background-image: linear-gradient(to left, black , orange); -webkit-text-fill-color: transparent; -webkit-background-clip: text;">Supercharge your content workflow<br class="phonenone"> using AI</h1>
+                    <p>Turn keywords and one-liners into persuasive, high converting ads, product descriptions, and blogs etc.</p>
+                    <div class="bottom">
+                        <a data-wow-duration="1.8s" href="#" class="btn btn-md btn-gradient wow fadeInDown" style="border-radius: 50px; visibility: visible; animation-duration: 1.8s; animation-name: fadeInDown;"
+                            >Get Started - Free!
+                        </a> 
+                        {{-- <a href="#watch" class="video-btn wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;"><i class="fas fa-play"></i>Watch Video</a> --}}
                     </div>
-
-                    <!-- <div class="col-lg-5 offset-lg-1 width-140 thumb wow fadeInRight" data-wow-duration="1s">
-                            <img src="{{asset('assets')}}/frontend/img/illustration/2.png" alt="Thumb">
-                        </div> -->
-                    <div class="col-lg-6 offset-lg-1 width-140 thumb wow fadeInRight">
-                        <div id="carouselExampleIndicators" class="carousel slide carouselhead" data-ride="carousel">
-                            <ol class="carousel-indicators" style="left: 40%;">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner" style="box-shadow: 20px 20px 14px #fe7474;">
-                                @if(!empty($main_content_text->file))
-                                @foreach($main_content_text->file as $key=>$value)
-                                <div class="carousel-item {{$key==0 ?'active':''}} ">
-                                    <img class="d-block w-100" src="{{asset('public/assets/page-content')}}/{{$value}}" alt="First slide">
-                                </div>
-                                @endforeach
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="{{asset('assets')}}/frontend/img/gif/1.gif" alt="Third slide">
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    @endif
+                        <span style="margin-left: 37px; color: rgba(76, 84, 90, 0.59);">No credit card required</span>
                 </div>
             </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="card-box" style="margin-top: 18%">
+                    {{-- <div class="bg-img">
+                        <img src="https://typeskip.ai/assets/frontend/landing-images/circle.svg" alt="circle">
+                        <img src="https://typeskip.ai/assets/frontend/landing-images/circle1.svg" alt="circle">
+                    </div> --}}
+                    <!-- card header -->
+                    <div class="card-header">
+                        <div class="three-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        
+                        <button id="reset"><img src="https://typeskip.ai/assets/frontend/landing-images/reset.svg" alt="reset">Reset</button>
+                    </div>
+                    <!-- card header end -->
+                    
+                    <!-- card top -->
+                    <div class="card-top">
+                        <a href="#"><img src="https://typeskip.ai/assets/frontend/landing-images/typeskip.png" alt="logo"></a>
+                        
+                    </div>
+                    <!-- card top end -->
+                    
+                    <!-- card main -->
+                    <div class="main-wrap">
+                        <!-- form -->
+                        <form class="rightform">
+                            <input id="name" placeholder="Company Name" readonly dataValue="SwolePatrol" width="500" type="text"> 
+                            <input id="title" placeholder="Tone of Voice" readonly dataValue="Witty" type="text">
+                            <textarea id="textarea" placeholder="Description" readonly dataValue="High quality honey cinnamon peanut butter whey protein" rows="3"></textarea> 
+                            <div class="keywords">
+                                <span class="placeholder">Keywords</span>
+                                <span class="keyword-item">26G Protein<button class="tag-remove"></button></span>
+                                <span class="keyword-item">Get Results<button class="tag-remove"></button></span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="outputs">
+                                    <input id="nValue" value="5" type="number" name="nValue" min="1" max="15" aria-describedby="ideas" autocomplete="off" class="pr-20 form-input">
+                                    <span>Outputs</span>
+                                </div>
+                                <button class="generate" type="button">
+                                    <span class="btn-load" ></span>
+                                    <span class="btn-txt">Generate</span>
+                                </button> 
+                            </div>
+                            <button class="playDemo">Step 1: Play Demo</button>
+                            <button type="button" class="hit-generate">Step 2: Hit Generate!</button>
+                        </form>
+                        <!-- form end -->
+            
+                        <!-- content box -->
+                        <div class="content-box">
+                            <div class="box-empty">
+                                <img src="https://typeskip.ai/assets/frontend/landing-images/demo.png" alt="" class="plane">
+                                <p>Answer the prompts and click generate to watch the AI magic happen ✨.</p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div class="card-item">
+                                        <p><b>Ad</b> • www.swolepatrol.com/ ▾</p>
+                                        <h3>Get Buff Fast | Build Muscle Fast | Boost Your Workout</h3>
+                                        <p>Finally, protein made the way it should be. With 26g of protein per serving and a mouth watering honey cinnamon peanut butter flavor, gains have never tasted this good.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card-item">
+                                        <p><b>Ad</b> • www.swolepatrol.com/ ▾</p>
+                                        <h3>Best Whey Protein | Whey Protein Powder | Whey Protein</h3>
+                                        <p>Swole Patrol – The Professional's Choice in Gaining Mass, Building Strength, and Wanting to Look Good Naked. And it just so happens to be packed with 26g of protein per serving, and only 2g of sugar.<br>
+                                        We know what you’re thinking: “How can this possibly taste good?” Well, we have a secret ingredient that makes all the difference…
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card-item">
+                                        <p><b>Ad</b> • www.swolepatrol.com/ ▾</p>
+                                        <h3>Get the gains you deserve</h3>
+                                        <p>You’ve been working hard in the gym, but your protein is holding you back from getting the results you want. SwolePatrol has 26G of protein per serving and tastes delicious so that you can get the gains you deserve without sacrificing taste or quality. Click here to try it for free: www.swolepatrol.com/freetrial</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card-item">
+                                        <p><b>Ad</b> • www.swolepatrol.com/ ▾</p>
+                                        <h3>Tired of protein powders that taste like chalk?</h3>
+                                        <p>Swole Patrol is a new type of protein powder made for the hard-gaining athlete. It’s loaded with 26G of muscle building protein and has a delicious Honey Cinnamon Peanut Butter flavor. But what really sets Swole Patrol apart from other proteins is how it’s made. We use an advanced process to make our whey isolate, which means you get more pure protein per serving than any other brand on the market!</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="card-item">
+                                        <p><b>Ad</b> • www.swolepatrol.com/ ▾</p>
+                                        <h3>Looking for a healthy protein shake?</h3>
+                                        <p>Swole Patrol is the first and only brand to deliver 26g of protein per serving in a delicious honey cinnamon peanut butter flavor. It’s perfect for pre-workout, post-workout, or just as a snack. And it’s made without any artificial sweeteners or flavors.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- content box end -->
+                    </div>
+                    <!-- card main end -->
+                </div>
+            </div>
+            
+    
         </div>
     </div>
+    <br>
     <!-- End Banner -->
 
     <!-- Start How it Works
         ============================================= -->
 
+    <!-- Fixed BG -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="site-heading text-center">
+                    <h2 class="area-title">Testimonials</h2>
+                    <div class="devider"></div>
+                    <p>
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @php
     $content1 = json_decode($page_content->content1);
     @endphp
-        <div class="container thisconcount">
+        {{-- <div class="container thisconcount">
             <div class="row">
                 @if(!empty($content1->content1_display) && $content1->content1_display=='true')
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -146,7 +232,169 @@
                 </div>
                 @endif
             </div><br><br>
+        </div> --}}
+
+    <div class="container">
+        <div class="card-columns">
+            <div class="card" Style="height: 100%">
+                <div class="card-body">
+                    <h3 class="card-title" style="font-size: large; margin-bottom: 30px;">
+                        <img style="margin-top: -5px;" src="{{asset('assets')}}/frontend/img/team/1.jpg" alt="">
+                        Capiche
+                        <p style="margin-left: 67px; margin-top: -20px;">capiche.com</p>
+                    </h3>
+                    <h3 class="card-text" style="margin-bottom: 1rem; 
+                                                font-size: 18px;
+                                                font-family: 'GT Walsheim', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+                                                font-weight: 400;
+                                                line-height: 1.4;"
+                                            >"Attio, a new take on CRMs, does the hard work for you..."
+                    </h3>
+                    <a href="#" style="font-size: 1rem;
+                                line-height: 1.35em;
+                                font-weight: 600;
+                                letter-spacing: -.01875rem;"
+                    >
+                        Software From the Future: The In...
+                    </a>
+                    <div style="margin-top: .25rem; color: #707070">
+                        February 2020
+                    </div>
+                </div>
+            </div>
+            <div class="card" Style="height: 100%">
+                <div class="card-body">
+                    <h3 class="card-title" style="font-size: large; margin-bottom: 30px;">
+                        <img style="margin-top: -5px;" src="{{asset('assets')}}/frontend/img/team/1.jpg" alt="">
+                        Capiche
+                        <p style="margin-left: 67px; margin-top: -20px;">capiche.com</p>
+                    </h3>
+                    <h3 class="card-text" style="margin-bottom: 1rem; 
+                                                font-size: 18px;
+                                                font-family: 'GT Walsheim', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+                                                font-weight: 400;
+                                                line-height: 1.4;"
+                                            >"The team have totally delivered and my job just got 10x easier. Great example of a strong #product team. Well done team @attio 🎉🎉🎉"
+                    </h3>
+                    <a href="#" style="font-size: 1rem;
+                                line-height: 1.35em;
+                                font-weight: 600;
+                                letter-spacing: -.01875rem;"
+                    >
+                        Software From the Future: The In...
+                    </a>
+                    <div style="margin-top: .25rem; color: #707070">
+                        February 2020
+                    </div>
+                </div>
+            </div>
+            <div class="card" Style="height: 100%">
+                <div class="card-body">
+                    <h3 class="card-title" style="font-size: large; margin-bottom: 30px;">
+                        <img style="margin-top: -5px;" src="{{asset('assets')}}/frontend/img/team/2.jpg" alt="">
+                        Capiche
+                        <p style="margin-left: 67px; margin-top: -20px;">capiche.com</p>
+                    </h3>
+                    <h3 class="card-text" style="margin-bottom: 1rem; 
+                                                font-size: 18px;
+                                                font-family: 'GT Walsheim', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+                                                font-weight: 400;
+                                                line-height: 1.4;"
+                                            >"The team have totally delivered and my job just got 10x easier. Great example of a strong #product team. Well done team @attio 🎉🎉🎉""
+                    </h3>
+                    <a href="#" style="font-size: 1rem;
+                                line-height: 1.35em;
+                                font-weight: 600;
+                                letter-spacing: -.01875rem;"
+                    >
+                        Software From the Future: The In...
+                    </a>
+                    <div style="margin-top: .25rem; color: #707070">
+                        February 2020
+                    </div>
+                </div>
+            </div>
+            <div class="card" Style="height: 100%">
+                <div class="card-body">
+                    <h3 class="card-title" style="font-size: large; margin-bottom: 30px;">
+                        <img style="margin-top: -5px;" src="{{asset('assets')}}/frontend/img/team/3.jpg" alt="">
+                        Capiche
+                        <p style="margin-left: 67px; margin-top: -20px;">capiche.com</p>
+                    </h3>
+                    <h3 class="card-text" style="margin-bottom: 1rem; 
+                                                font-size: 18px;
+                                                font-family: 'GT Walsheim', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+                                                font-weight: 400;
+                                                line-height: 1.4;"
+                                            >"Attio, a new take on CRMs, does the hard work for you..."
+                    </h3>
+                    <a href="#" style="font-size: 1rem;
+                                line-height: 1.35em;
+                                font-weight: 600;
+                                letter-spacing: -.01875rem;"
+                    >
+                        Software From the Future: The In...
+                    </a>
+                    <div style="margin-top: .25rem; color: #707070">
+                        February 2020
+                    </div>
+                </div>
+            </div>
+            <div class="card" Style="height: 100%">
+                <div class="card-body">
+                    <h3 class="card-title" style="font-size: large; margin-bottom: 30px;">
+                        <img style="margin-top: -5px;" src="{{asset('assets')}}/frontend/img/team/4.jpg" alt="">
+                        Capiche
+                        <p style="margin-left: 67px; margin-top: -20px;">capiche.com</p>
+                    </h3>
+                    <h3 class="card-text" style="margin-bottom: 1rem; 
+                                                font-size: 18px;
+                                                font-family: 'GT Walsheim', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+                                                font-weight: 400;
+                                                line-height: 1.4;"
+                                            >"Attio, a new take on CRMs, does the hard work for you..."
+                    </h3>
+                    <a href="#" style="font-size: 1rem;
+                                line-height: 1.35em;
+                                font-weight: 600;
+                                letter-spacing: -.01875rem;"
+                    >
+                        Software From the Future: The In...
+                    </a>
+                    <div style="margin-top: .25rem; color: #707070">
+                        February 2020
+                    </div>
+                </div>
+            </div>
+            <div class="card" Style="height: 100%">
+                <div class="card-body">
+                    <h3 class="card-title" style="font-size: large; margin-bottom: 30px;">
+                        <img style="margin-top: -5px;" src="{{asset('assets')}}/frontend/img/team/1.jpg" alt="">
+                        Capiche
+                        <p style="margin-left: 67px; margin-top: -20px;">capiche.com</p>
+                    </h3>
+                    <h3 class="card-text" style="margin-bottom: 1rem; 
+                                                font-size: 18px;
+                                                font-family: 'GT Walsheim', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+                                                font-weight: 400;
+                                                line-height: 1.4;"
+                                            >"Attio, a new take on CRMs, does the hard work for you..."
+                    </h3>
+                    <a href="#" style="font-size: 1rem;
+                                line-height: 1.35em;
+                                font-weight: 600;
+                                letter-spacing: -.01875rem;"
+                    >
+                        Software From the Future: The In...
+                    </a>
+                    <div style="margin-top: .25rem; color: #707070">
+                        February 2020
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+        
     <!-- Ends How it Works
     ============================================= -->
 
@@ -157,7 +405,7 @@
     @if(!empty($content4->content4_display) && $content4->content4_display=='true')
     <!-- Start Benefits
     ============================================= -->
-    <div id="features" class="our-features-area relative default-padding">
+    {{-- <div id="features" class="our-features-area relative default-padding">
         <!-- Fixed BG -->
         <div class="fixed-bg" style="background-image: url({{asset('assets')}}/frontend/img/shape/11.png);"></div>
         <!-- Fixed BG -->
@@ -235,7 +483,73 @@
             </div>
 
         </div>
+    </div> --}}
+    <br><br>
+    <!-- Fixed BG -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="site-heading text-center">
+                    <h2 class="area-title">3 tiered Demo</h2>
+                    <div class="devider"></div>
+                    <p>
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-1" Style="height: 100%">
+                    <h3>Ionic Native</h3>
+                    <p>A curated set of ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-2" Style="height: 100%">
+                    <h3>UI Components</h3>
+                    <p>Tabs, buttons, inputs, lists, cards, and more! A comprehensive library
+                        of mobile UI components, ready to go.
+                        Tabs, buttons, inputs, lists, cards, and more! A comprehensive library
+                        of mobile UI components, ready to go
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-3" Style="height: 100%">
+                    <h3>Theming</h3>
+                    <p>Learn how to easily customize and modify your app’s design to fit your
+                        brand across all mobile platform styles.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card card-1" Style="height: 100%">
+                    <h3>Ionic Native</h3>
+                    <p>A curated set of ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-2" Style="height: 100%">
+                    <h3>UI Components</h3>
+                    <p>Tabs, buttons, inputs, lists, cards, and more! A comprehensive library
+                        of mobile UI components, ready to go.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-3" Style="height: 100%">
+                    <h3>Theming</h3>
+                    <p>Learn how to easily customize and modify your app’s design to fit your
+                        brand across all mobile platform styles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @endif
     @php
     $content8 = json_decode($page_content->content8);
@@ -791,7 +1105,9 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <pay-with-stripe :price="{{ $price }}"></pay-with-stripe>
+                                    @auth
+                                        <pay-with-stripe :price="{{ $price }}"></pay-with-stripe>
+                                    @endauth
                                 </div>
                             </div>
                         </div>

@@ -161,7 +161,7 @@ class UserController extends Controller
             $input = $request->all();
             $formData = array(
                 'company_name'=>$input['Company'],
-                'discription'=> $input['CompanyDescription'],
+                'description'=> $input['CompanyDescription'],
                 'add_keywords'=>$input['add_keywords'],
                 'user_id'    =>$this->data['user']['userID'],
                 'avoid_keywords'     =>$input['avoid_keyword'],
@@ -1361,11 +1361,12 @@ class UserController extends Controller
      */
     public function createFormData($input = array(), $userData)
     {
+        dd($userData);
         try {
             return array(
                 'project_id' => $userData->current_project,
                 'company_name' => $input['Company'] ?? '',
-                'discription' => $input['CompanyDescription'] ?? '',
+                'description' => $input['CompanyDescription'] ?? '',
                 'add_keywords' => $input['add_keywords'] ?? '',
                 'user_id' => $this->data['user']['userID'] ?? '',
                 'avoid_keywords' => $input['avoid_keyword'] ?? '',

@@ -117,7 +117,7 @@
     <header id="home">
 
         <!-- Start Navigation -->
-        <nav class="navbar navbar-default attr-bg navbar-fixed dark no-background bootsnav">
+        <nav class="navbar navbar-default attr-bg navbar-fixed dark no-background bootsnav" id="navbar">
 
             <div class="container">
 
@@ -139,7 +139,7 @@
                             <a  href="" data-toggle="modal" data-target="#login-form">Login</a>
                         </li>
                         <li class="button">
-                            <a href="{{url('register')}}" data-toggle="modal" data-target="#register-form">Register</a>
+                            <a style="background: #FE6161; color: white;" href="{{url('register')}}" data-toggle="modal" data-target="#register-form">Register</a>
                         </li>
                         @endif
                     </ul>
